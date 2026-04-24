@@ -1,4 +1,4 @@
-import { BaseTile } from "./BaseTile.js";
+import { BaseTile } from "./BaseTile.ts";
 import type { Cell } from "./Cell.ts";
 
 export class Grid<T = never> {
