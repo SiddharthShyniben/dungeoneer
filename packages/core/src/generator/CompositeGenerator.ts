@@ -14,8 +14,8 @@ export class CompositeGenerator {
         private generators: Generator[]
     ) { }
 
-    generate(grid: Grid, region?: Region, rng: RNG): CompositeGeneratorResult {
-        const [subregions, generatorIndices] = this.partitioner(region || createFilledRegion(grid.width, grid.height), rng);
+    generate(grid: Grid, rng: RNG, region: Region = createFilledRegion(grid.width, grid.height)): CompositeGeneratorResult {
+        const [subregions, generatorIndices] = this.partitioner(region, rng);
         const results: GeneratorResult[] = [];
 
         for (let i = 0; i < subregions.length; i++) {
