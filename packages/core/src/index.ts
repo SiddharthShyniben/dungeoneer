@@ -14,3 +14,12 @@ export * from "./grid/BaseTile.ts";
 export * from "./region/Region.ts";
 
 export * from "./rng/RNG.ts";
+
+export * from "./postproc/PostProcessor.ts";
+export * from "./postproc/connect/Carver.ts";
+export * from "./postproc/connect/ConnectionStrategy.ts";
+export * from "./postproc/connect/Connector.ts";
+export * from "./postproc/connect/carvers/LCorridor.ts";
+export * from "./postproc/connect/carvers/DrunkardCarver.ts";
+export * from "./postproc/connect/carvers/AStarCarver.ts";
+export * from "./postproc/connect/strategies/MSTStrategy.ts";
