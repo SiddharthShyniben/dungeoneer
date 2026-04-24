@@ -69,6 +69,27 @@ export function subtract(a: Region, b: Region): Region {
     return createRegion(mask, width, height)
 }
 
+export function cellInRegion(region: Region, x: number, y: number): boolean {
+    if (x < region.bounds.x || x >= region.bounds.x + region.bounds.width || y < region.bounds.y || y >= region.bounds.y + region.bounds.height) {
+        return false
+    }
+
+    return region.mask[(y - region.bounds.y) * region.bounds.width + (x - region.bounds.x)] === 1
+}
+
+export function getCellsInRegion(region: Region): { x: number, y: number }[] {
+    const cells: { x: number, y: number }[] = []
+    for (let y = 0; y < region.bounds.height; y++) {
+        for (let x = 0; x < region.bounds.width; x++) {
+            if (region.mask[y * region.bounds.width + x] === 1) {
+                cells.push({ x: x + region.bounds.x, y: y + region.bounds.y })
+            }
+        }
+    }
+
+    return cells
+}
+
 export function computeBounds(mask: Uint8Array, gridWidth: number, gridHeight: number): Bounds {
     let minX = gridWidth, maxX = 0, minY = gridHeight, maxY = 0
     for (let y = 0; y < gridHeight; y++) {
