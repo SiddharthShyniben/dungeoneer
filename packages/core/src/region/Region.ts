@@ -1,0 +1,1 @@
+export type Region = Uint8Array;
