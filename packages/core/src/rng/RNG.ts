@@ -1,6 +1,7 @@
 export interface RNG {
     next(): number
     nextInt(min: number, max: number): number
+    nextBool(): boolean
     fork(): RNG
 }
 
@@ -17,6 +18,10 @@ export class DefaultRNG implements RNG {
 
     nextInt(min: number, max: number): number {
         return Math.floor(this.next() * (max - min + 1)) + min
+    }
+
+    nextBool(): boolean {
+        return this.next() < 0.5
     }
 
     fork(): RNG {
