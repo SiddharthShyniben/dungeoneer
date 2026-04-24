@@ -1,36 +1,40 @@
 import type { Grid } from "../../grid/Grid.ts"
-import { BaseTile } from "../../index.ts"
+import { BaseTile, cellInRegion, getCellsInRegion, type Region } from "../../index.ts"
 
-export function findComponents(grid: Grid): Set<number>[] {
+export function findComponents(grid: Grid, region: Region): Set<number>[] {
     const visited = new Uint8Array(grid.width * grid.height)
     const components: Set<number>[] = []
 
-    for (let y = 0; y < grid.height; y++) {
-        for (let x = 0; x < grid.width; x++) {
-            const idx = y * grid.width + x
-            if (visited[idx] || grid.get(x, y)?.base !== BaseTile.Floor) continue
+    for (const { x, y } of getCellsInRegion(region)) {
+        const idx = y * grid.width + x
+        if (visited[idx] || grid.get(x, y)?.base !== BaseTile.Floor) continue
 
-            // BFS from this cell
-            const component = new Set<number>()
-            const queue = [idx]
-            while (queue.length > 0) {
-                const curr = queue.pop()!
-                if (visited[curr]) continue
-                visited[curr] = 1
-                component.add(curr)
+        const component = new Set<number>()
+        const queue = [idx]
 
-                const cx = curr % grid.width
-                const cy = Math.floor(curr / grid.width)
+        while (queue.length > 0) {
+            const curr = queue.pop()!
+            if (visited[curr]) continue
+            visited[curr] = 1
+            component.add(curr)
 
-                for (const [nx, ny] of [[cx + 1, cy], [cx - 1, cy], [cx, cy + 1], [cx, cy - 1]]) {
-                    const nidx = ny! * grid.width + nx!
-                    if (grid.inBounds(nx!, ny!) && !visited[nidx] && grid.get(nx!, ny!)?.base === BaseTile.Floor) {
-                        queue.push(nidx)
-                    }
+            const cx = curr % grid.width
+            const cy = Math.floor(curr / grid.width)
+
+            for (const [nx, ny] of [[cx + 1, cy], [cx - 1, cy], [cx, cy + 1], [cx, cy - 1]]) {
+                const nidx = ny! * grid.width + nx!
+                if (
+                    grid.inBounds(nx!, ny!) &&
+                    cellInRegion(region, nx!, ny!) &&
+                    !visited[nidx] &&
+                    grid.get(nx!, ny!)?.base === BaseTile.Floor
+                ) {
+                    queue.push(nidx)
                 }
             }
-            components.push(component)
         }
+
+        components.push(component)
     }
 
     return components
