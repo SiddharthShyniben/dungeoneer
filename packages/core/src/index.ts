@@ -24,3 +24,4 @@ export * from "./postproc/connect/carvers/DrunkardCarver.ts";
 export * from "./postproc/connect/carvers/AStarCarver.ts";
 export * from "./postproc/connect/strategies/MSTStrategy.ts";
 export * from "./postproc/connect/strategies/MSTWithCyclesStrategy.ts";
+export * from "./postproc/connect/strategies/NearestNeighborStrategy.ts";
