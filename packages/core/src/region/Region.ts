@@ -17,6 +17,11 @@ export function createRegion(mask: Uint8Array, width: number, height: number, x:
     }
 }
 
+export function createFilledRegion(width: number, height: number, x: number = 0, y: number = 0): Region {
+    const mask = new Uint8Array(width * height).fill(1)
+    return createRegion(mask, width, height, x, y)
+}
+
 export function createRegionFrom2DArray(array: number[][], x: number = 0, y: number = 0): Region {
     const height = array.length
     const width = array[0]?.length || 0

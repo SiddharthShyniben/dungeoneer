@@ -19,3 +19,6 @@ export interface Generator {
 export interface LeafGenerator extends Generator {
     readonly id: number
 }
+
+let idCounter = 0;
+export const generatorId = () => idCounter++;
