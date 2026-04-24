@@ -25,3 +25,9 @@ export * from "./postproc/connect/carvers/AStarCarver.ts";
 export * from "./postproc/connect/strategies/MSTStrategy.ts";
 export * from "./postproc/connect/strategies/MSTWithCyclesStrategy.ts";
 export * from "./postproc/connect/strategies/NearestNeighborStrategy.ts";
+
+export * from "./region/Partitioner.ts";
+export * from "./region/partitioners/bsp.ts";
+export * from "./region/partitioners/connected-grid.ts";
+export * from "./region/partitioners/diagonal.ts";
+export * from "./region/partitioners/grid.ts";
