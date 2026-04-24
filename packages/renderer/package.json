@@ -4,7 +4,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
-        "@dungeon-forge/core": "*",
+        "@dungeoneer/core": "*",
         "chalk": "^5.3.0"
     },
     "scripts": {

@@ -1,7 +1,9 @@
 {
     "name": "dungeoneer",
     "private": true,
-    "workspaces": ["packages/*"],
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "start": "npm run start --workspace=@dungeoneer/renderer"
     }
