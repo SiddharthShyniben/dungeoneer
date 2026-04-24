@@ -1,6 +1,6 @@
 export * from "./generator/Generator.ts";
 export * from "./generator/CompositeGenerator.ts";
-export * from "./generator/test_impl/Filler.ts";
+export * from "./generator/CA/Cave.ts";
 
 export * from "./graph/GraphEdge.ts";
 export * from "./graph/GraphNode.ts"
