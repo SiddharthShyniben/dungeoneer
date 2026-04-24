@@ -1,6 +1,6 @@
 
 import type { Grid } from "../grid/Grid.ts";
-import type { Region } from "../region/Region.ts";
+import { createFilledRegion, createRegion, type Region } from "../region/Region.ts";
 import type { RNG } from "../rng/RNG.ts";
 import type { Generator, GeneratorResult } from "./Generator.ts";
 
@@ -14,8 +14,8 @@ export class CompositeGenerator {
         private generators: Generator[]
     ) { }
 
-    generate(grid: Grid, region: Region, rng: RNG): CompositeGeneratorResult {
-        const [subregions, generatorIndices] = this.partitioner(region, rng);
+    generate(grid: Grid, region?: Region, rng: RNG): CompositeGeneratorResult {
+        const [subregions, generatorIndices] = this.partitioner(region || createFilledRegion(grid.width, grid.height), rng);
         const results: GeneratorResult[] = [];
 
         for (let i = 0; i < subregions.length; i++) {
@@ -37,7 +37,7 @@ export class CompositeGenerator {
                 throw new Error(`No generator found at index ${generatorIndex} for subregion ${i}.`);
             }
 
-            const result = generator.generate(grid, subregion, rng);
+            const result = generator.generate(grid, rng, subregion);
             results.push(result);
         }
 

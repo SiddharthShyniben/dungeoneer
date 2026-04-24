@@ -13,7 +13,7 @@ export interface GeneratorResult {
 }
 
 export interface Generator {
-    generate(grid: Grid, region: Region, rng: RNG): GeneratorResult
+    generate(grid: Grid, rng: RNG, region?: Region): GeneratorResult
 }
 
 export interface LeafGenerator extends Generator {
